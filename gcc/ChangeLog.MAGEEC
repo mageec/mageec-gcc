@@ -1,0 +1,6 @@
+2014-11-24  Joern Rennecke  <joern.rennecke@embecosm.com>
+
+	* config/arm/arm.c (arm_option_override): Don't disable
+	Hot/Cold partitioning.
+	(arm_reorg): Treat NOTE_INSN_SWITCH_TEXT_SECTIONS as needing
+	lots of space.

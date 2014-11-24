@@ -3015,16 +3015,6 @@ arm_option_override (void)
   else
     max_insns_skipped = current_tune->max_insns_skipped;
 
-  /* Hot/Cold partitioning is not currently supported, since we can't
-     handle literal pool placement in that case.  */
-  if (flag_reorder_blocks_and_partition)
-    {
-      inform (input_location,
-	      "-freorder-blocks-and-partition not supported on this architecture");
-      flag_reorder_blocks_and_partition = 0;
-      flag_reorder_blocks = 1;
-    }
-
   if (flag_pic)
     /* Hoisting PIC address calculations more aggressively provides a small,
        but measurable, size reduction for PIC code.  Therefore, we decrease
@@ -17372,7 +17362,7 @@ arm_reorg (void)
   minipool_pad = 0;
 
   /* Scan all the insns and record the operands that will need fixing.  */
-  for (insn = next_nonnote_insn (insn); insn; insn = next_nonnote_insn (insn))
+  for (insn = next_nonnote_insn (insn); insn; insn = NEXT_INSN (insn))
     {
       if (BARRIER_P (insn))
 	push_minipool_barrier (insn, address);
@@ -17396,6 +17386,9 @@ arm_reorg (void)
 	   the _current_ padding because the minipool insertions
 	   themselves might change it.  */
 	address += get_label_padding (insn);
+      else if (NOTE_P (insn)
+	       && NOTE_KIND (insn) == NOTE_INSN_SWITCH_TEXT_SECTIONS)
+	address += 4096; /* Let all pool references go out of range.  */
     }
 
   fix = minipool_fix_head;
