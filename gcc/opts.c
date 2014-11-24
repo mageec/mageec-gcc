@@ -756,6 +756,9 @@ finish_options (struct gcc_options *opts, struct gcc_options *opts_set,
       opts->x_flag_no_inline = 1;
     }
 
+  if (opts->x_flag_partition_hot_warm)
+    opts->x_flag_reorder_blocks_and_partition = 1;
+
   /* The optimization to partition hot and cold basic blocks into separate
      sections of the .o and executable files does not work (currently)
      with exception handling.  This is because there is no support for

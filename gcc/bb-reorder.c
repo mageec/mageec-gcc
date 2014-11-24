@@ -1588,7 +1588,7 @@ find_rarely_executed_basic_blocks_and_crossing_edges (void)
     {
       bool cold_bb = false;
 
-      if (probably_never_executed_bb_p (cfun, bb))
+      if (!flag_partition_hot_warm && probably_never_executed_bb_p (cfun, bb))
         {
           /* Handle profile insanities created by upstream optimizations
              by also checking the incoming edge weights. If there is a non-cold
@@ -1597,6 +1597,20 @@ find_rarely_executed_basic_blocks_and_crossing_edges (void)
           cold_bb = true;
           FOR_EACH_EDGE (e, ei, bb->preds)
             if (!probably_never_executed_edge_p (cfun, e))
+              {
+                cold_bb = false;
+                break;
+              }
+        }
+      else if (flag_partition_hot_warm && !maybe_hot_bb_p (cfun, bb))
+        {
+          /* Handle profile insanities created by upstream optimizations
+             by also checking the incoming edge weights. If there is a non-cold
+             incoming edge, conservatively prevent this block from being split
+             into the cold section.  */
+          cold_bb = true;
+          FOR_EACH_EDGE (e, ei, bb->preds)
+            if (maybe_hot_edge_p (e))
               {
                 cold_bb = false;
                 break;

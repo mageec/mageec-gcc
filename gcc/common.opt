@@ -1864,6 +1864,10 @@ freorder-blocks-and-partition
 Common Report Var(flag_reorder_blocks_and_partition) Optimization
 Reorder basic blocks and partition into hot and cold sections
 
+freorder-blocks-and-partition-hot-warm
+Common Report Var(flag_partition_hot_warm) Optimization
+Reorder basic blocks and partition into hot and warm sections
+
 freorder-functions
 Common Report Var(flag_reorder_functions) Optimization
 Reorder functions to improve code placement

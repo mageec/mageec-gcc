@@ -1,5 +1,12 @@
 2014-11-24  Joern Rennecke  <joern.rennecke@embecosm.com>
 
+	* common.opt (freorder-blocks-and-partition-hot-warm): New option.
+	* bb-reorder.c (find_rarely_executed_basic_blocks_and_crossing_edges):
+	Implement it.
+	* testsuite/gcc.target/arm/hot-warm-1.c: New file.
+
+2014-11-24  Joern Rennecke  <joern.rennecke@embecosm.com>
+
 	* config/arm/arm.c (arm_option_override): Don't disable
 	Hot/Cold partitioning.
 	(arm_reorg): Treat NOTE_INSN_SWITCH_TEXT_SECTIONS as needing
