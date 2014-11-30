@@ -141,6 +141,7 @@ maybe_hot_frequency_p (struct function *fun, int freq)
   if (PARAM_VALUE (HOT_BB_FREQUENCY_FRACTION) == 0)
     return false;
   if (freq < (ENTRY_BLOCK_PTR_FOR_FN (fun)->frequency
+	      * PARAM_VALUE (HOT_BB_FREQUENCY_NUMERATOR)
 	      / PARAM_VALUE (HOT_BB_FREQUENCY_FRACTION)))
     return false;
   return true;

@@ -1,3 +1,8 @@
+2014-11-30  Joern Rennecke  <joern.rennecke@embecosm.com>
+
+	* params.def (hot-bb-frequency-numerato): New parameter.
+	* predict.c (maybe_hot_frequency_p): Use it.
+
 2014-11-24  Joern Rennecke  <joern.rennecke@embecosm.com>
 
 	* common.opt (freorder-blocks-and-partition-hot-warm): New option.

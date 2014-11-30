@@ -372,6 +372,10 @@ DEFPARAM(HOT_BB_FREQUENCY_FRACTION,
 	 "hot-bb-frequency-fraction",
 	 "Select fraction of the maximal frequency of executions of basic block in function given basic block needs to have to be considered hot",
 	 1000, 0, 0)
+DEFPARAM(HOT_BB_FREQUENCY_NUMERATOR,
+	 "hot-bb-frequency-numerator",
+	 "Select multiple/numerator of the maximal frequency of executions of basic block in function given basic block needs to have to be considered hot",
+	 1, 1, 10000)
 
 DEFPARAM(UNLIKELY_BB_COUNT_FRACTION,
 	 "unlikely-bb-count-fraction",
